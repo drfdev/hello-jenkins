@@ -18,3 +18,33 @@ $ docker run -p 8080:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home jenki
 ```
 
 Работает, плагины установились, дженкинс запустился
+
+---
+
+Попытка 3:
+
+Docker compose:
+
+**docker-compose.yml**
+
+```yml
+version: '3'
+services:
+  jenkins:
+    image: 'jenkins/jenkins:lts'
+    ports:
+      - 8080:8080
+      - 50000:50000
+  container_name: jenkins
+  volumes:
+    - 'jenkins_home:/var/jenkins_home'
+volumes:
+  jenkins_home:
+    driver: local
+```
+
+```bash
+$ sudo docker-compose up
+```
+
+Результат: дженкинс запустился, плагины установились
